@@ -33,9 +33,45 @@ class AppState:
 
 def main(page: ft.Page):
     """Main Flet app entry point."""
-    page.title = "Lang Mastering"
-    page.add(ft.Text("Hello from Lang Mastering!", size=30, color="white"))
-    page.add(ft.Text("If you can see this, Flet is working.", size=16, color="yellow"))
+    try:
+        page.title = "Lang Mastering"
+        page.theme = get_theme()
+        page.bgcolor = BG_COLOR
+        page.padding = 0
+
+        # Custom state store (Flet Session has no set/get in 0.82)
+        page.app_state = AppState()
+
+        # Database init
+        db = Database()
+        db.initialize()
+        page.app_state.set("db", db)
+
+        # Load existing user (if any)
+        user_repo = UserRepo(db.conn)
+        users = user_repo.get_all()
+        if users:
+            page.app_state.set("current_user", users[0])
+
+        # Router
+        pages = {
+            "/": home_page,
+            "/learn": learn_page,
+            "/review": review_page,
+            "/progress": progress_page,
+            "/settings": settings_page,
+        }
+        router = Router(page, pages)
+        page.app_state.set("router", router)
+
+        # Navigate to home
+        router.navigate("/")
+
+    except Exception:
+        page.controls.clear()
+        page.add(ft.Text("Error starting app:", size=20, color="red"))
+        page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
+        page.update()
 
 
 if __name__ == "__main__":
