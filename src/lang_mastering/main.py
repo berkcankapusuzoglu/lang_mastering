@@ -36,6 +36,7 @@ def main(page: ft.Page):
     try:
         page.title = "Lang Mastering"
         page.theme = get_theme()
+        page.theme_mode = ft.ThemeMode.DARK
         page.bgcolor = BG_COLOR
         page.padding = 0
 
@@ -65,7 +66,14 @@ def main(page: ft.Page):
         page.app_state.set("router", router)
 
         # Navigate to home
-        router.navigate("/")
+        try:
+            router.navigate("/")
+        except Exception:
+            page.controls.clear()
+            page.bgcolor = BG_COLOR
+            page.add(ft.Text("Error in router.navigate:", size=20, color="red"))
+            page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
+            page.update()
 
     except Exception:
         page.controls.clear()
