@@ -11,7 +11,12 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
-RUN pip install --no-cache-dir -e .
+
+# Install as editable WITHOUT heavy optional deps (whisper/torch)
+# requirements.txt has the lightweight deps; pyproject.toml has all deps
+RUN pip install --no-cache-dir --no-deps -e .
+
+ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8550
 
