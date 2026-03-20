@@ -33,51 +33,9 @@ class AppState:
 
 def main(page: ft.Page):
     """Main Flet app entry point."""
-    try:
-        page.app_state = AppState()
-        page.title = "Lang Mastering"
-        page.theme = get_theme()
-        page.theme_mode = ft.ThemeMode.DARK
-        page.bgcolor = BG_COLOR
-
-        # Only set window size for desktop mode
-        is_web = getattr(page, "web", True)
-        if not is_web:
-            page.window.width = 420
-            page.window.height = 750
-
-        # Initialize database
-        db = Database()
-        db.run_migrations()
-        page.app_state.set("db", db)
-
-        # Load existing user (if any)
-        user_repo = UserRepo(db.conn)
-        users = user_repo.get_all()
-        if users:
-            page.app_state.set("current_user", users[0])
-            # Seed data for user's language
-            vocab_repo = VocabRepo(db.conn)
-            lesson_repo = LessonRepo(db.conn)
-            seed_all(vocab_repo, lesson_repo, users[0].target_language)
-
-        # Set up routes
-        pages = {
-            "/": home_page,
-            "/learn": learn_page,
-            "/review": review_page,
-            "/progress": progress_page,
-            "/settings": settings_page,
-        }
-
-        router = Router(page, pages)
-        page.app_state.set("router", router)
-        router.navigate("/")
-    except Exception:
-        traceback.print_exc()
-        page.controls.clear()
-        page.controls.append(ft.Text(f"Error: {traceback.format_exc()}", color="red"))
-        page.update()
+    page.title = "Lang Mastering"
+    page.add(ft.Text("Hello from Lang Mastering!", size=30, color="white"))
+    page.add(ft.Text("If you can see this, Flet is working.", size=16, color="yellow"))
 
 
 if __name__ == "__main__":
