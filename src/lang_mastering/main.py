@@ -33,66 +33,26 @@ class AppState:
 
 def main(page: ft.Page):
     """Main Flet app entry point."""
+    page.title = "Lang Mastering"
+
+    steps = []
     try:
-        page.title = "Lang Mastering"
-        page.theme = get_theme()
-        page.theme_mode = ft.ThemeMode.DARK
-        page.bgcolor = BG_COLOR
-        page.padding = 0
-
-        # Custom state store (Flet Session has no set/get in 0.82)
-        page.app_state = AppState()
-
-        # Database init
+        steps.append("1. Starting DB init")
         db = Database()
+        steps.append("2. DB created")
         db.run_migrations()
-        page.app_state.set("db", db)
-
-        # Load existing user (if any)
+        steps.append("3. Migrations done")
         user_repo = UserRepo(db.conn)
         users = user_repo.get_all()
-        if users:
-            page.app_state.set("current_user", users[0])
-
-        # Test: bypass router, directly add home page content
-        user = page.app_state.get("current_user")
-        page.add(
-            ft.Container(
-                content=ft.Column(
-                    [
-                        ft.Icon(ft.Icons.SCHOOL, size=80, color=ACCENT_COLOR),
-                        ft.Text(
-                            "Welcome to Lang Mastering!",
-                            size=28, weight=ft.FontWeight.BOLD, color=TEXT_COLOR,
-                        ),
-                        ft.Text(
-                            f"User: {user.name if user else 'None'}",
-                            size=16, color=TEXT_SECONDARY,
-                        ),
-                        ft.Container(height=20),
-                        ft.ElevatedButton(
-                            "Get Started",
-                            icon=ft.Icons.ARROW_FORWARD,
-                            style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
-                            width=200, height=50,
-                        ),
-                    ],
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    expand=True,
-                ),
-                bgcolor=BG_COLOR,
-                expand=True,
-                padding=20,
-            )
-        )
-        page.update()
-
+        steps.append(f"4. Users found: {len(users)}")
     except Exception:
-        page.controls.clear()
-        page.add(ft.Text("Error starting app:", size=20, color="red"))
-        page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
-        page.update()
+        steps.append(f"ERROR: {traceback.format_exc()}")
+
+    # Always render something visible
+    page.add(ft.Text("Lang Mastering Debug", size=24, color="white"))
+    for s in steps:
+        page.add(ft.Text(s, size=14, color="yellow"))
+    page.update()
 
 
 if __name__ == "__main__":
