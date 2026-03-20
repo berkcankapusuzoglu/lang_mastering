@@ -300,6 +300,15 @@ def _show_review(page, state, db, navigate, set_content):
     srs = SRSEngine(db)
     cards = srs.get_session_mix(user.id)
 
+    # If no cards exist yet, create new ones from vocabulary
+    if not cards:
+        vocab_repo_init = VocabRepo(db.conn)
+        all_vocab = vocab_repo_init.get_by_language(user.target_language)
+        if all_vocab:
+            vocab_ids = [v.id for v in all_vocab]
+            srs.get_new_cards(user.id, vocab_ids, "flashcard", limit=20)
+            cards = srs.get_session_mix(user.id)
+
     if not cards:
         content = ft.Column([
             ft.Icon(ft.Icons.CHECK_CIRCLE, size=80, color=GREEN),
