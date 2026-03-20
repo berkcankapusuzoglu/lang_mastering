@@ -44,7 +44,7 @@ def main(page: ft.Page):
 
         # Database init
         db = Database()
-        db.initialize()
+        db.run_migrations()
         page.app_state.set("db", db)
 
         # Load existing user (if any)
