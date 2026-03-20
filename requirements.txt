@@ -1,0 +1,5 @@
+flet>=0.25.0
+fsrs>=4.0.0
+python-Levenshtein>=0.25.0
+edge-tts>=6.1.0
+pyttsx3>=2.90

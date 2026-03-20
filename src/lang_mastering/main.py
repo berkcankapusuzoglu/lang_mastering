@@ -1,5 +1,7 @@
 """Flet app entry point."""
 
+import os
+
 import flet as ft
 
 from lang_mastering.db.database import Database
@@ -20,8 +22,9 @@ async def main(page: ft.Page):
     page.theme = get_theme()
     page.theme_mode = ft.ThemeMode.DARK
     page.bgcolor = BG_COLOR
-    page.window.width = 420
-    page.window.height = 750
+    if not page.web:
+        page.window.width = 420
+        page.window.height = 750
 
     # Initialize database
     db = Database()
@@ -53,4 +56,5 @@ async def main(page: ft.Page):
 
 
 if __name__ == "__main__":
-    ft.run(main)
+    port = int(os.environ.get("PORT", 8550))
+    ft.run(main, view=None, port=port)
