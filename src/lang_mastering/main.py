@@ -8,7 +8,7 @@ import flet as ft
 from lang_mastering.db.database import Database
 from lang_mastering.db.repositories import UserRepo, VocabRepo, LessonRepo
 from lang_mastering.data.seed import seed_all
-from lang_mastering.ui.theme import get_theme, BG_COLOR, ACCENT_COLOR, TEXT_COLOR, TEXT_SECONDARY
+from lang_mastering.ui.theme import get_theme, BG_COLOR
 from lang_mastering.ui.router import Router
 from lang_mastering.ui.pages.home import home_page
 from lang_mastering.ui.pages.learn import learn_page
@@ -33,26 +33,46 @@ class AppState:
 
 def main(page: ft.Page):
     """Main Flet app entry point."""
-    page.title = "Lang Mastering"
-
-    steps = []
     try:
-        steps.append("1. Starting DB init")
+        page.title = "Lang Mastering"
+        page.theme = get_theme()
+        page.theme_mode = ft.ThemeMode.DARK
+        page.bgcolor = BG_COLOR
+        page.padding = 0
+
+        # Custom state store (Flet Session has no set/get in 0.82)
+        page.app_state = AppState()
+
+        # Database init
         db = Database()
-        steps.append("2. DB created")
         db.run_migrations()
-        steps.append("3. Migrations done")
+        page.app_state.set("db", db)
+
+        # Load existing user (if any)
         user_repo = UserRepo(db.conn)
         users = user_repo.get_all()
-        steps.append(f"4. Users found: {len(users)}")
-    except Exception:
-        steps.append(f"ERROR: {traceback.format_exc()}")
+        if users:
+            page.app_state.set("current_user", users[0])
 
-    # Always render something visible
-    page.add(ft.Text("Lang Mastering Debug", size=24, color="white"))
-    for s in steps:
-        page.add(ft.Text(s, size=14, color="yellow"))
-    page.update()
+        # Router
+        pages = {
+            "/": home_page,
+            "/learn": learn_page,
+            "/review": review_page,
+            "/progress": progress_page,
+            "/settings": settings_page,
+        }
+        router = Router(page, pages)
+        page.app_state.set("router", router)
+
+        # Navigate to home
+        router.navigate("/")
+
+    except Exception:
+        page.controls.clear()
+        page.add(ft.Text("Error starting app:", size=20, color="red"))
+        page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
+        page.update()
 
 
 if __name__ == "__main__":
