@@ -67,4 +67,4 @@ async def main(page: ft.Page):
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8550))
-    ft.run(main, view=None, port=port)
+    ft.run(main, view=None, port=port, host="0.0.0.0")
