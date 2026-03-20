@@ -16,10 +16,15 @@ class Router:
         self.pages = pages
         self._current_route = None
         self._content = ft.Column(expand=True, spacing=0)
+        self._wrapper = ft.Container(
+            content=self._content,
+            expand=True,
+            bgcolor="#1a1a2e",  # BG_COLOR
+        )
 
     def get_container(self) -> ft.Column:
         """Return the content container to be added to the page."""
-        return self._content
+        return self._wrapper
 
     def navigate(self, route: str):
         """Navigate to a route by swapping container children."""

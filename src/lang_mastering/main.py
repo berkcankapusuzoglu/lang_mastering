@@ -39,9 +39,6 @@ def main(page: ft.Page):
     page.bgcolor = BG_COLOR
     page.padding = 0
 
-    # Show version marker (v2) so we know which deploy is live
-    page.add(ft.Text("v2", size=10, color="gray"))
-
     try:
         # Custom state store
         page.app_state = AppState()
