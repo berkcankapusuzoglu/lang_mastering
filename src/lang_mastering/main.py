@@ -297,8 +297,8 @@ def _show_review(page, state, db, navigate, set_content):
         ), 2)
         return
 
-    srs = SRSEngine(db, user)
-    cards = srs.get_session_mix()
+    srs = SRSEngine(db)
+    cards = srs.get_session_mix(user.id)
 
     if not cards:
         content = ft.Column([
