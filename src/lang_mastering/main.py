@@ -8,7 +8,7 @@ import flet as ft
 from lang_mastering.db.database import Database
 from lang_mastering.db.repositories import UserRepo, VocabRepo, LessonRepo
 from lang_mastering.data.seed import seed_all
-from lang_mastering.ui.theme import get_theme, BG_COLOR
+from lang_mastering.ui.theme import get_theme, BG_COLOR, ACCENT_COLOR, TEXT_COLOR, TEXT_SECONDARY
 from lang_mastering.ui.router import Router
 from lang_mastering.ui.pages.home import home_page
 from lang_mastering.ui.pages.learn import learn_page
@@ -54,26 +54,39 @@ def main(page: ft.Page):
         if users:
             page.app_state.set("current_user", users[0])
 
-        # Router
-        pages = {
-            "/": home_page,
-            "/learn": learn_page,
-            "/review": review_page,
-            "/progress": progress_page,
-            "/settings": settings_page,
-        }
-        router = Router(page, pages)
-        page.app_state.set("router", router)
-
-        # Navigate to home
-        try:
-            router.navigate("/")
-        except Exception:
-            page.controls.clear()
-            page.bgcolor = BG_COLOR
-            page.add(ft.Text("Error in router.navigate:", size=20, color="red"))
-            page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
-            page.update()
+        # Test: bypass router, directly add home page content
+        user = page.app_state.get("current_user")
+        page.add(
+            ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Icon(ft.Icons.SCHOOL, size=80, color=ACCENT_COLOR),
+                        ft.Text(
+                            "Welcome to Lang Mastering!",
+                            size=28, weight=ft.FontWeight.BOLD, color=TEXT_COLOR,
+                        ),
+                        ft.Text(
+                            f"User: {user.name if user else 'None'}",
+                            size=16, color=TEXT_SECONDARY,
+                        ),
+                        ft.Container(height=20),
+                        ft.ElevatedButton(
+                            "Get Started",
+                            icon=ft.Icons.ARROW_FORWARD,
+                            style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
+                            width=200, height=50,
+                        ),
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    expand=True,
+                ),
+                bgcolor=BG_COLOR,
+                expand=True,
+                padding=20,
+            )
+        )
+        page.update()
 
     except Exception:
         page.controls.clear()
