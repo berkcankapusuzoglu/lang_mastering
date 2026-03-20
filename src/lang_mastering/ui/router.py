@@ -4,32 +4,32 @@ import flet as ft
 
 
 class Router:
-    """Manages page routing using page.add (Flet 0.82 web compatible)."""
+    """Manages page routing via a persistent content container."""
 
     def __init__(self, page: ft.Page, pages: dict):
         self.page = page
-        self.pages = pages  # {route_str: page_builder_fn}
+        self.pages = pages
         self._current_route = None
+        # Single persistent container that holds all page content
+        self._container = ft.Column(expand=True, spacing=0)
+        self.page.add(self._container)
 
     def navigate(self, route: str):
-        """Navigate to a route by rebuilding page controls."""
+        """Navigate to a route by swapping container content."""
         if route not in self.pages:
             route = "/"
         self._current_route = route
         view = self.pages[route](self.page)
 
-        # Clear existing controls
-        self.page.controls.clear()
-        self.page.update()
-
-        # Extract controls and bottom bar from the View
+        # Replace container content
+        self._container.controls.clear()
         if isinstance(view, ft.View):
             for ctrl in view.controls:
-                self.page.add(ctrl)
+                self._container.controls.append(ctrl)
             self.page.bottom_appbar = view.bottom_appbar
             if view.bgcolor:
                 self.page.bgcolor = view.bgcolor
         else:
-            self.page.add(view)
+            self._container.controls.append(view)
 
-        self.page.update()
+        self._container.update()
