@@ -22,17 +22,7 @@ WARNING_COLOR = "#ff9800"
 def get_theme(dark_mode: bool = True) -> ft.Theme:
     """Get the app theme."""
     return ft.Theme(
-        color_scheme=ft.ColorScheme(
-            background=BG_COLOR,
-            surface=BG_COLOR,
-            surface_variant=SURFACE_COLOR,
-            on_background=TEXT_COLOR,
-            on_surface=TEXT_COLOR,
-            primary=ACCENT_COLOR,
-            on_primary=TEXT_COLOR,
-            secondary=PRIMARY_COLOR,
-            on_secondary=TEXT_COLOR,
-        ),
+        color_scheme_seed=PRIMARY_COLOR,
         visual_density=ft.VisualDensity.COMFORTABLE,
     )
 
