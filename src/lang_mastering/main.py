@@ -31,30 +31,47 @@ class AppState:
         self._data.pop(key, None)
 
 
+def _show_error(page: ft.Page, msg: str):
+    """Show error without clearing page controls."""
+    page.add(ft.Text(f"ERROR: {msg}", size=12, color="red"))
+    page.update()
+
+
 def main(page: ft.Page):
     """Main Flet app entry point."""
+    page.title = "Lang Mastering"
+
+    # Show loading immediately (proves page works)
+    status = ft.Text("Loading...", size=16, color="yellow")
+    page.add(status)
+    page.update()
+
     try:
-        page.title = "Lang Mastering"
         page.theme = get_theme()
         page.theme_mode = ft.ThemeMode.DARK
         page.bgcolor = BG_COLOR
         page.padding = 0
 
-        # Custom state store (Flet Session has no set/get in 0.82)
         page.app_state = AppState()
 
-        # Database init
+        status.value = "Initializing database..."
+        status.update()
+
         db = Database()
         db.run_migrations()
         page.app_state.set("db", db)
 
-        # Load existing user (if any)
+        status.value = "Loading user data..."
+        status.update()
+
         user_repo = UserRepo(db.conn)
         users = user_repo.get_all()
         if users:
             page.app_state.set("current_user", users[0])
 
-        # Router
+        status.value = "Setting up router..."
+        status.update()
+
         pages = {
             "/": home_page,
             "/learn": learn_page,
@@ -65,14 +82,13 @@ def main(page: ft.Page):
         router = Router(page, pages)
         page.app_state.set("router", router)
 
-        # Navigate to home
+        status.value = "Navigating to home..."
+        status.update()
+
         router.navigate("/")
 
     except Exception:
-        page.controls.clear()
-        page.add(ft.Text("Error starting app:", size=20, color="red"))
-        page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
-        page.update()
+        _show_error(page, traceback.format_exc())
 
 
 if __name__ == "__main__":
