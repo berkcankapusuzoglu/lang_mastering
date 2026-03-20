@@ -7,27 +7,18 @@ import flet as ft
 class Router:
     """Manages page routing for Flet web mode.
 
-    Uses a single content Column added via page.add() to avoid
-    page.controls.clear() which breaks Flet 0.82 web rendering.
+    Uses page.add/remove to swap page content controls.
+    Never calls page.controls.clear() which breaks Flet 0.82 web.
     """
 
     def __init__(self, page: ft.Page, pages: dict):
         self.page = page
         self.pages = pages
         self._current_route = None
-        self._content = ft.Column(expand=True, spacing=0)
-        self._wrapper = ft.Container(
-            content=self._content,
-            expand=True,
-            bgcolor="#1a1a2e",  # BG_COLOR
-        )
-
-    def get_container(self) -> ft.Column:
-        """Return the content container to be added to the page."""
-        return self._wrapper
+        self._current_control = None
 
     def navigate(self, route: str):
-        """Navigate to a route by swapping container children."""
+        """Navigate to a route by swapping the page content."""
         if route not in self.pages:
             route = "/"
         self._current_route = route
@@ -35,24 +26,36 @@ class Router:
         try:
             view = self.pages[route](self.page)
         except Exception:
-            self._content.controls.clear()
-            self._content.controls.append(
-                ft.Text(f"Page error: {traceback.format_exc()}", size=12, color="red")
-            )
-            self._content.update()
+            err = ft.Text(f"Page error: {traceback.format_exc()}", size=12, color="red")
+            self.page.add(err)
+            self.page.update()
             return
 
-        self._content.controls.clear()
+        # Remove previous content control (if any)
+        if self._current_control is not None:
+            try:
+                self.page.controls.remove(self._current_control)
+            except ValueError:
+                pass
+
+        # Extract content and nav bar from the View
         if isinstance(view, ft.View):
-            for ctrl in view.controls:
-                self._content.controls.append(ctrl)
+            # Wrap view controls in a single Container
+            content = ft.Container(
+                content=ft.Column(
+                    view.controls,
+                    expand=True,
+                    spacing=0,
+                ),
+                bgcolor=view.bgcolor or "#1a1a2e",
+                expand=True,
+            )
             self.page.bottom_appbar = view.bottom_appbar
             if view.bgcolor:
                 self.page.bgcolor = view.bgcolor
         else:
-            self._content.controls.append(view)
+            content = view
 
-        try:
-            self._content.update()
-        except Exception:
-            pass
+        self._current_control = content
+        self.page.add(content)
+        self.page.update()

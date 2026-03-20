@@ -40,10 +40,9 @@ def main(page: ft.Page):
     page.padding = 0
 
     try:
-        # Custom state store
         page.app_state = AppState()
 
-        # Database init
+        # Database
         db = Database()
         db.run_migrations()
         page.app_state.set("db", db)
@@ -54,7 +53,7 @@ def main(page: ft.Page):
         if users:
             page.app_state.set("current_user", users[0])
 
-        # Router — creates a Column container, does NOT touch page.controls
+        # Router — uses page.add/remove to swap content
         pages_map = {
             "/": home_page,
             "/learn": learn_page,
@@ -65,17 +64,13 @@ def main(page: ft.Page):
         router = Router(page, pages_map)
         page.app_state.set("router", router)
 
-        # Add router's container to page (single page.add call)
-        page.add(router.get_container())
-
-        # Navigate to home — only modifies the container's children
+        # Navigate to home
         router.navigate("/")
 
     except Exception:
         page.add(ft.Text("Error:", size=20, color="red"))
         page.add(ft.Text(traceback.format_exc(), size=12, color="yellow"))
-
-    page.update()
+        page.update()
 
 
 if __name__ == "__main__":
