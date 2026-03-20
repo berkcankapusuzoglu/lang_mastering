@@ -14,8 +14,8 @@ from lang_mastering.ui.theme import (
 
 def progress_page(page: ft.Page) -> ft.View:
     """Build the progress dashboard page."""
-    user = page.session.get("current_user")
-    db = page.session.get("db")
+    user = page.app_state.get("current_user")
+    db = page.app_state.get("db")
 
     if user is None:
         from lang_mastering.ui.components.nav_bar import build_nav_bar
@@ -24,7 +24,7 @@ def progress_page(page: ft.Page) -> ft.View:
             [ft.Container(
                 content=ft.Column([
                     ft.Text("Please create a profile first", size=18, color=TEXT_SECONDARY),
-                    ft.ElevatedButton("Go to Settings", on_click=lambda _: page.session.get("router").navigate("/settings")),
+                    ft.ElevatedButton("Go to Settings", on_click=lambda _: page.app_state.get("router").navigate("/settings")),
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, alignment=ft.MainAxisAlignment.CENTER, expand=True),
                 bgcolor=BG_COLOR, expand=True, padding=20,
             )],

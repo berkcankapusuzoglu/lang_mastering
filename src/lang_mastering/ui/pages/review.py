@@ -24,8 +24,8 @@ LANGUAGE_NAMES = {"es": "Spanish", "tr": "Turkish"}
 
 def review_page(page: ft.Page) -> ft.View:
     """Build the review session page."""
-    user = page.session.get("current_user")
-    db = page.session.get("db")
+    user = page.app_state.get("current_user")
+    db = page.app_state.get("db")
 
     if user is None:
         from lang_mastering.ui.components.nav_bar import build_nav_bar
@@ -34,7 +34,7 @@ def review_page(page: ft.Page) -> ft.View:
             [ft.Container(
                 content=ft.Column([
                     ft.Text("Please create a profile first", size=18, color=TEXT_SECONDARY),
-                    ft.ElevatedButton("Go to Settings", on_click=lambda _: page.session.get("router").navigate("/settings")),
+                    ft.ElevatedButton("Go to Settings", on_click=lambda _: page.app_state.get("router").navigate("/settings")),
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, alignment=ft.MainAxisAlignment.CENTER, expand=True),
                 bgcolor=BG_COLOR, expand=True, padding=20,
             )],
@@ -52,7 +52,7 @@ def review_page(page: ft.Page) -> ft.View:
     gamification = GamificationEngine(user_repo, progress_repo, review_repo)
 
     # Get or create session cards
-    lesson = page.session.get("current_lesson")
+    lesson = page.app_state.get("current_lesson")
     lang_color = get_language_color(user.target_language)
 
     # Build session cards
@@ -73,8 +73,8 @@ def review_page(page: ft.Page) -> ft.View:
             new = srs.get_new_cards(user.id, vocab_ids, ex_type, limit=5)
             new_card_count += len(new)
             session_cards.extend(new)
-        if page.session.contains_key("current_lesson"):
-            page.session.remove("current_lesson")
+        if page.app_state.contains_key("current_lesson"):
+            page.app_state.remove("current_lesson")
 
     if not session_cards:
         from lang_mastering.ui.components.nav_bar import build_nav_bar
@@ -89,7 +89,7 @@ def review_page(page: ft.Page) -> ft.View:
                     ft.ElevatedButton(
                         "Browse Lessons",
                         icon=ft.Icons.MENU_BOOK,
-                        on_click=lambda _: page.session.get("router").navigate("/learn"),
+                        on_click=lambda _: page.app_state.get("router").navigate("/learn"),
                         style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
                     ),
                 ], horizontal_alignment=ft.CrossAxisAlignment.CENTER, alignment=ft.MainAxisAlignment.CENTER, expand=True),
@@ -531,7 +531,7 @@ def review_page(page: ft.Page) -> ft.View:
             xp_earned=state["xp_earned"], time_spent_seconds=elapsed,
         )
         # Refresh user in session
-        page.session.set("current_user", user)
+        page.app_state.set("current_user", user)
 
         progress_text.value = f"{total}/{total}"
         progress_bar.value = 1.0
@@ -557,7 +557,7 @@ def review_page(page: ft.Page) -> ft.View:
             ft.ElevatedButton(
                 "Back to Home",
                 icon=ft.Icons.HOME,
-                on_click=lambda _: page.session.get("router").navigate("/"),
+                on_click=lambda _: page.app_state.get("router").navigate("/"),
                 style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
                 width=200,
             ),
@@ -578,7 +578,7 @@ def review_page(page: ft.Page) -> ft.View:
                         ft.IconButton(
                             ft.Icons.CLOSE,
                             icon_color=TEXT_SECONDARY,
-                            on_click=lambda _: page.session.get("router").navigate("/"),
+                            on_click=lambda _: page.app_state.get("router").navigate("/"),
                             tooltip="End session",
                         ),
                     ], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),

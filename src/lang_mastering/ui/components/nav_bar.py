@@ -17,7 +17,7 @@ def build_nav_bar(page: ft.Page, selected_index: int = 0) -> ft.BottomAppBar:
 
     def on_nav_click(e):
         idx = e.control.data
-        page.session.get("router").navigate(destinations[idx]["route"])
+        page.app_state.get("router").navigate(destinations[idx]["route"])
 
     buttons = []
     for i, dest in enumerate(destinations):

@@ -17,9 +17,24 @@ from lang_mastering.ui.pages.progress import progress_page
 from lang_mastering.ui.pages.settings import settings_page
 
 
+class AppState:
+    """Simple key-value state store attached to each page session."""
+    def __init__(self):
+        self._data = {}
+    def set(self, key, value):
+        self._data[key] = value
+    def get(self, key):
+        return self._data.get(key)
+    def contains_key(self, key):
+        return key in self._data
+    def remove(self, key):
+        self._data.pop(key, None)
+
+
 async def main(page: ft.Page):
     """Main Flet app entry point."""
     try:
+        page.app_state = AppState()
         page.title = "Lang Mastering"
         page.theme = get_theme()
         page.theme_mode = ft.ThemeMode.DARK
@@ -34,13 +49,13 @@ async def main(page: ft.Page):
         # Initialize database
         db = Database()
         db.run_migrations()
-        page.session.set("db", db)
+        page.app_state.set("db", db)
 
         # Load existing user (if any)
         user_repo = UserRepo(db.conn)
         users = user_repo.get_all()
         if users:
-            page.session.set("current_user", users[0])
+            page.app_state.set("current_user", users[0])
             # Seed data for user's language
             vocab_repo = VocabRepo(db.conn)
             lesson_repo = LessonRepo(db.conn)
@@ -56,7 +71,7 @@ async def main(page: ft.Page):
         }
 
         router = Router(page, pages)
-        page.session.set("router", router)
+        page.app_state.set("router", router)
         router.navigate("/")
     except Exception:
         traceback.print_exc()
