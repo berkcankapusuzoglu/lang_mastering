@@ -1,0 +1,182 @@
+[
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 1,
+        "title": "Greetings & Introductions",
+        "description": "Learn basic Turkish greetings and how to introduce yourself",
+        "category": "greetings",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 2,
+        "title": "Numbers 1-20",
+        "description": "Count from one to twenty in Turkish",
+        "category": "numbers",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 3,
+        "title": "Family Members",
+        "description": "Learn words for family relationships",
+        "category": "family",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 4,
+        "title": "Food & Drink",
+        "description": "Essential food and beverage vocabulary",
+        "category": "food",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 5,
+        "title": "Colors",
+        "description": "Learn the colors in Turkish",
+        "category": "colors",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 6,
+        "title": "Essential Verbs",
+        "description": "The most common Turkish verbs and vowel harmony basics",
+        "category": "verbs",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "vowel_harmony"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 7,
+        "title": "Days & Months",
+        "description": "Days of the week and months of the year",
+        "category": "time",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 8,
+        "title": "Basic Adjectives",
+        "description": "Describe things with common adjectives",
+        "category": "adjectives",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 9,
+        "title": "Body Parts",
+        "description": "Learn the parts of the body with possessive suffixes",
+        "category": "body",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "suffix"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A1",
+        "lesson_number": 10,
+        "title": "Common Phrases",
+        "description": "Useful everyday phrases and expressions",
+        "category": "phrases",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "listening", "speaking"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 1,
+        "title": "Travel Essentials",
+        "description": "Vocabulary for traveling and transportation",
+        "category": "travel",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 2,
+        "title": "Shopping",
+        "description": "Words for shopping and buying things with locative suffixes",
+        "category": "shopping",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "suffix"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 3,
+        "title": "Health & Body",
+        "description": "Medical vocabulary and health expressions",
+        "category": "health",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 4,
+        "title": "Directions & Places",
+        "description": "Navigate and ask for directions using directional suffixes",
+        "category": "directions",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "suffix"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 5,
+        "title": "Around the House",
+        "description": "Rooms and household objects",
+        "category": "home",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 6,
+        "title": "Weather",
+        "description": "Talk about the weather",
+        "category": "weather",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 7,
+        "title": "Work & Office",
+        "description": "Workplace vocabulary with vowel harmony practice",
+        "category": "work",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "vowel_harmony"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 8,
+        "title": "Emotions & Feelings",
+        "description": "Express how you feel",
+        "category": "emotions",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "speaking"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 9,
+        "title": "More Verbs",
+        "description": "Expand your verb vocabulary with conjugation suffixes",
+        "category": "verbs",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "vowel_harmony", "suffix"]
+    },
+    {
+        "language": "tr",
+        "cefr_level": "A2",
+        "lesson_number": 10,
+        "title": "Review & Practice",
+        "description": "Mixed review of A2 vocabulary",
+        "category": "mixed",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "listening", "cloze", "vowel_harmony", "suffix"]
+    }
+]
