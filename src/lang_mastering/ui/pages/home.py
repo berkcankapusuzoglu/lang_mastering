@@ -11,7 +11,7 @@ from lang_mastering.ui.theme import (
 def home_page(page: ft.Page) -> ft.View:
     """Build the home/dashboard page."""
     # Get current user from page session
-    user = page.session.store.get("current_user")
+    user = page.session.get("current_user")
 
     if user is None:
         # No user yet - show welcome
@@ -24,7 +24,7 @@ def home_page(page: ft.Page) -> ft.View:
                 ft.ElevatedButton(
                     "Get Started",
                     icon=ft.Icons.ARROW_FORWARD,
-                    on_click=lambda _: page.session.store.get("router").navigate("/settings"),
+                    on_click=lambda _: page.session.get("router").navigate("/settings"),
                     style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
                     width=200, height=50,
                 ),
@@ -59,7 +59,7 @@ def home_page(page: ft.Page) -> ft.View:
                 ft.ElevatedButton(
                     "Start Review",
                     icon=ft.Icons.PLAY_ARROW,
-                    on_click=lambda _: page.session.store.get("router").navigate("/review"),
+                    on_click=lambda _: page.session.get("router").navigate("/review"),
                     style=ft.ButtonStyle(bgcolor=ACCENT_COLOR, color=TEXT_COLOR),
                     width=250, height=55,
                 ),
@@ -67,7 +67,7 @@ def home_page(page: ft.Page) -> ft.View:
                 ft.OutlinedButton(
                     "Browse Lessons",
                     icon=ft.Icons.MENU_BOOK,
-                    on_click=lambda _: page.session.store.get("router").navigate("/learn"),
+                    on_click=lambda _: page.session.get("router").navigate("/learn"),
                     width=250, height=45,
                 ),
             ],

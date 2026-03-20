@@ -34,13 +34,13 @@ async def main(page: ft.Page):
         # Initialize database
         db = Database()
         db.run_migrations()
-        page.session.store.set("db", db)
+        page.session.set("db", db)
 
         # Load existing user (if any)
         user_repo = UserRepo(db.conn)
         users = user_repo.get_all()
         if users:
-            page.session.store.set("current_user", users[0])
+            page.session.set("current_user", users[0])
             # Seed data for user's language
             vocab_repo = VocabRepo(db.conn)
             lesson_repo = LessonRepo(db.conn)
@@ -56,7 +56,7 @@ async def main(page: ft.Page):
         }
 
         router = Router(page, pages)
-        page.session.store.set("router", router)
+        page.session.set("router", router)
         router.navigate("/")
     except Exception:
         traceback.print_exc()

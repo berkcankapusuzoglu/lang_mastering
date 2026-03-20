@@ -14,7 +14,7 @@ from lang_mastering.ui.theme import (
 
 def settings_page(page: ft.Page) -> ft.View:
     """Build the settings page."""
-    user = page.session.store.get("current_user")
+    user = page.session.get("current_user")
 
     name_field = ft.TextField(
         label="Your Name",
@@ -53,7 +53,7 @@ def settings_page(page: ft.Page) -> ft.View:
     daily_goal_slider.on_change = on_slider_change
 
     def save_profile(e):
-        db: Database = page.session.store.get("db")
+        db: Database = page.session.get("db")
         repo = UserRepo(db.conn)
 
         if user is None:
@@ -63,7 +63,7 @@ def settings_page(page: ft.Page) -> ft.View:
                 daily_goal=int(daily_goal_slider.value),
             )
             new_user = repo.create(new_user)
-            page.session.store.set("current_user", new_user)
+            page.session.set("current_user", new_user)
             # Seed vocabulary data for chosen language
             vocab_repo = VocabRepo(db.conn)
             lesson_repo = LessonRepo(db.conn)
@@ -73,9 +73,9 @@ def settings_page(page: ft.Page) -> ft.View:
             user.target_language = language_group.value
             user.daily_goal = int(daily_goal_slider.value)
             repo.update(user)
-            page.session.store.set("current_user", user)
+            page.session.set("current_user", user)
 
-        page.session.store.get("router").navigate("/")
+        page.session.get("router").navigate("/")
 
     content = ft.Column(
         [
