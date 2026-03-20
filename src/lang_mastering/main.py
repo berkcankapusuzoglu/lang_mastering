@@ -31,7 +31,7 @@ class AppState:
         self._data.pop(key, None)
 
 
-async def main(page: ft.Page):
+def main(page: ft.Page):
     """Main Flet app entry point."""
     try:
         page.app_state = AppState()
