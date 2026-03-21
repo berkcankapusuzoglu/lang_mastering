@@ -201,8 +201,8 @@ class TestFullReviewSession:
         assert es_result["vocabulary"]["A2"] > 100
         assert tr_result["vocabulary"]["A1"] > 100
         assert tr_result["vocabulary"]["A2"] > 100
-        assert es_result["lessons"] == 20
-        assert tr_result["lessons"] == 20
+        assert es_result["lessons"] == 30
+        assert tr_result["lessons"] == 30
 
         # Verify no cross-contamination
         es_vocab = vocab_repo.get_by_language("es")

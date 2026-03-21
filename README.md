@@ -4,7 +4,7 @@ A free language learning app combining **spaced repetition**, **active recall ex
 
 **Live app:** https://lang-mastering.onrender.com
 
-Currently supports **Spanish** and **Turkish** for English speakers.
+Currently supports **Spanish** and **Turkish** for English speakers, with A1, A2, and B1 levels.
 
 ---
 
@@ -26,7 +26,7 @@ When you open the app for the first time, you'll see the **Welcome** screen.
 4. Set your **daily goal** (5-50 cards/day) using the slider
 5. Click **Save**
 
-This creates your profile and loads ~200+ vocabulary words for your chosen language.
+This creates your profile and loads ~600+ vocabulary words across 3 CEFR levels for your chosen language.
 
 ### 3. Home Dashboard
 
@@ -42,8 +42,9 @@ After creating your profile, the home screen shows:
 
 Tap the **book icon** in the bottom bar to see lessons organized by CEFR level:
 
-- **A1** (Beginner): Greetings, numbers, family, food, colors, animals, common verbs
-- **A2** (Elementary): Travel, shopping, health, weather, work, hobbies, directions
+- **A1** (Beginner): Greetings, numbers, family, food, colors, verbs, time, adjectives, body, phrases
+- **A2** (Elementary): Travel, shopping, health, directions, home, weather, work, emotions, verbs, review
+- **B1** (Intermediate): Opinions, education, technology, environment, culture, relationships, media, sports, cooking, professions
 
 Each lesson shows:
 - Title and topic

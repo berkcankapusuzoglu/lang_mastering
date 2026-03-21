@@ -178,5 +178,95 @@
         "description": "Mixed review of A2 vocabulary",
         "category": "mixed",
         "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "listening", "cloze"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 1,
+        "title": "Expressing Opinions",
+        "description": "Share your thoughts, agree and disagree politely",
+        "category": "opinions",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "cloze"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 2,
+        "title": "Education & Studies",
+        "description": "University, school subjects, and academic life",
+        "category": "education",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 3,
+        "title": "Technology & Internet",
+        "description": "Computers, apps, and the digital world",
+        "category": "technology",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "cloze"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 4,
+        "title": "Environment & Nature",
+        "description": "Ecology, climate, and the natural world",
+        "category": "environment",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 5,
+        "title": "Arts & Culture",
+        "description": "Music, cinema, literature, and art",
+        "category": "culture",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 6,
+        "title": "Relationships & Social Life",
+        "description": "Friendship, dating, and social interactions",
+        "category": "relationships",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "cloze"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 7,
+        "title": "Media & News",
+        "description": "Newspapers, social media, and staying informed",
+        "category": "media",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "listening"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 8,
+        "title": "Sports & Fitness",
+        "description": "Sports, exercise, and competition vocabulary",
+        "category": "sports",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 9,
+        "title": "Cooking & Recipes",
+        "description": "Kitchen actions, ingredients, and cooking terms",
+        "category": "cooking",
+        "exercise_types": ["flashcard_l2l1", "mcq", "typing", "cloze"]
+    },
+    {
+        "language": "es",
+        "cefr_level": "B1",
+        "lesson_number": 10,
+        "title": "Professions & Careers",
+        "description": "Job roles, career paths, and workplace actions",
+        "category": "professions",
+        "exercise_types": ["flashcard_l2l1", "flashcard_l1l2", "mcq", "typing", "cloze"]
     }
 ]
